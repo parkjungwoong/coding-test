@@ -18,15 +18,33 @@ public class P1316 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int loopCount = Integer.parseInt(br.readLine());
+        int groupWordCount = 0;
 
-        int chr = 0;
-        int[] alpa = new int[26];
+        Loop1: for(int i=0; loopCount>i; i++){
 
-        for(int i=0; loopCount>i; i++){
-            chr = br.read();
-            //alpa[chr-97];
+            boolean[] alpa = new boolean[26];
+
+            int chr = 0;
+            int beforeChr = chr;
+
+            while (true){
+                chr = br.read();
+                if(chr == 10) break;//개행까지 읽음
+
+                //이전 입력값과 다르고 입력된 문자일 경우
+                if (beforeChr != chr && alpa[chr-97]) {
+                    br.readLine();//해당 라인까지 버퍼 비우고
+                    continue Loop1;//카운트 건너 뛰고 다음 라인 읽기
+                }
+
+                alpa[chr-97] = true;
+
+                beforeChr = chr;
+            }
+            groupWordCount++;
         }
-
         br.close();
+
+        System.out.println(groupWordCount);
     }
 }
