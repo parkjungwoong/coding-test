@@ -1,10 +1,15 @@
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * K번째수
+ */
 public class P42748 {
     public static void main(String[] args) {
-        solution(new int[]{1, 5, 2, 6, 3, 7, 4}, new int[][]{{2,5,3},{4,4,1},{1,7,3}});
+        int[] solution = solution(new int[]{1, 5, 2, 6, 3, 7, 4}, new int[][]{{2, 5, 3}, {4, 4, 1}, {1, 7, 3}});
+
+        for(int e : solution) {
+            System.out.println(e);
+        }
     }
 
     public static int[] solution(int[] array, int[][] commands) {
@@ -21,11 +26,8 @@ public class P42748 {
             int[] temp = new int[splitLen];
 
             System.arraycopy(array, srcPos-1,temp, 0, splitLen);
-
-            List<Integer> sort = Arrays.stream(temp)
-                    .boxed().sorted().collect(Collectors.toList());
-
-            answer[i] = sort.get(pickPos);
+            Arrays.sort(temp);
+            answer[i] = temp[pickPos];
         }
 
         return answer;
