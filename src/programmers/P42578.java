@@ -1,3 +1,5 @@
+package programmers;
+
 import java.util.*;
 //위장
 public class P42578 {
